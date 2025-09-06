@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteNote } from "@/lib/api";
 import styles from "./NoteList.module.css";
 import type { Note } from "../../types/note";
+import Link from "next/link";
 
 interface NoteListProps {
   notes: Note[];
@@ -28,6 +29,7 @@ export default function NoteList({ notes }: NoteListProps) {
           <h2 className={styles.title}>{note.title}</h2>
           <p className={styles.content}>{note.content}</p>
           <div className={styles.footer}>
+            <Link href={`/notes/${note.id}`}> View Details</Link>
             <span className={styles.tag}>{note.tag}</span>
             <button
               type="button"

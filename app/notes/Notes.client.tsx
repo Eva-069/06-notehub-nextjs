@@ -10,7 +10,7 @@ import NoteForm from '@/components/NoteForm/NoteForm';
 import { fetchNotes } from '@/lib/api';
 import Loading from '@/app/loading';
 import { Toaster } from 'react-hot-toast';
-import css from '../notes/NotePage.module.css';
+import css from '@/app/notes/[id]/NotePage.module.css';
 
 const NotesClient = () => {
   const [query, setQuery] = useState<string>('');
@@ -19,9 +19,9 @@ const NotesClient = () => {
   const [showLoader, setShowLoader] = useState<boolean>(false);
 
   const onQueryChange = useDebouncedCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (newQuery: string) => {
       setPage(1);
-      setQuery(e.target.value);
+      setQuery(newQuery);
     },
     500
   );
@@ -52,7 +52,7 @@ const NotesClient = () => {
     <div className={css.app}>
       <Toaster />
       <header className={css.toolbar}>
-        <SearchBox onChange={onQueryChange} />
+        <SearchBox onChange={onQueryChange}/>
         {totalPages > 1 && (
           <Pagination totalPages={totalPages} page={page} setPage={setPage} />
         )}

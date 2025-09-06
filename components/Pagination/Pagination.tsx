@@ -3,22 +3,22 @@ import styles from "./Pagination.module.css";
 
 interface PaginationProps {
   totalPages: number;
-  currentPage: number;
-  onPageChange: (page: number) => void;
+  page: number;
+  setPage: (page: number) => void;
 }
 
 export default function Pagination({
   totalPages,
-  currentPage,
-  onPageChange,
+  page,
+  setPage,
 }: PaginationProps) {
   if (totalPages <= 1) return null;
   
-  const validCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
+  const validCurrentPage = Math.max(1, Math.min(page, totalPages));
 
   function handlePageChange(selectedItem: { selected: number }) {
     const newPage = selectedItem.selected + 1;
-    onPageChange(newPage);
+    setPage(newPage);
   }
 
   return (

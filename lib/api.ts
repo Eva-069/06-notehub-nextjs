@@ -1,5 +1,6 @@
 import axios from "axios";
-import type { Note ,NoteId } from "@/types/note";
+import type { Note, NoteId } from "@/types/note";
+import { NewNote } from "@/types/note";
 
 export interface NotesResponce {
     notes: Note[];
@@ -28,7 +29,7 @@ export const fetchNotes = async(
 }
 
 export const CreateNote = async (
-    newNote: Omit<Note, 'id' | 'createAt' | 'apdateAt'>) => {
+    newNote: NewNote) => {
     const { data } = await axios.post<Note>('/notes', newNote);
     return data;
 }

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery,keepPreviousData } from '@tanstack/react-query';
 import NoteList from '@/components/NoteList/NoteList';
 import Modal from '@/components/Modal/Modal';
 import Pagination from '@/components/Pagination/Pagination';
@@ -36,7 +36,8 @@ const NotesClient = () => {
     queryKey: ['notes', query, page],
     queryFn: () => fetchNotes(page, 12, query),
     staleTime: 1000 * 60,
-    refetchOnWindowFocus: false,
+      refetchOnWindowFocus: false,
+      placeholderData: keepPreviousData
   });
 
   if ((isLoading || isFetching) && !showLoader) {

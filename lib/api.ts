@@ -2,7 +2,7 @@ import axios from "axios";
 import type { Note, NoteId } from "@/types/note";
 import { NewNote } from "@/types/note";
 
-export interface NotesResponce {
+export interface NotesResponse {
     notes: Note[];
     totalPages: number;
 }
@@ -15,20 +15,20 @@ export const fetchNotes = async(
   page: number =1 ,
   perPage: number =12,
   search?: string
-): Promise<NotesResponce> => {
+): Promise<NotesResponse> => {
     const params: Record<string, string | number> = {
         page: Math.max(1, page),
         perPage
     };
   if (search) params.search = search;
 
-  const { data } = await axios.get<NotesResponce>("/notes", {
+  const { data } = await axios.get<NotesResponse>("/notes", {
     params,
   });
   return data;
 }
 
-export const CreateNote = async (
+export const createNote = async (
     newNote: NewNote) => {
     const { data } = await axios.post<Note>('/notes', newNote);
     return data;

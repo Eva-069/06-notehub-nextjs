@@ -3,7 +3,7 @@ import css from './NoteForm.module.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { CreateNote } from "@/lib/api"; 
+import { createNote } from "@/lib/api"; 
 
 export type NoteFormProps = {
   onClose: () => void;
@@ -19,7 +19,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient();
   
   const mutation = useMutation({
-    mutationFn: CreateNote,
+    mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] }); 
       onClose(); 
